@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 19, 2024 at 02:04 PM
+-- Generation Time: Mar 20, 2024 at 04:07 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.3
 
@@ -34,6 +34,22 @@ CREATE TABLE `detail_transaksi` (
   `harga` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `detail_transaksi`
+--
+
+INSERT INTO `detail_transaksi` (`id`, `id_produk`, `id_transaksi`, `harga`) VALUES
+(1, 1, 1, 25000),
+(2, 2, 2, 30000),
+(3, 3, 3, 16000),
+(4, 4, 4, 20000),
+(5, 5, 5, 42000),
+(6, 6, 6, 12000),
+(7, 7, 7, 70000),
+(8, 8, 8, 42000),
+(9, 9, 9, 18000),
+(10, 10, 10, 22000);
+
 -- --------------------------------------------------------
 
 --
@@ -42,18 +58,24 @@ CREATE TABLE `detail_transaksi` (
 
 CREATE TABLE `jenis_produk` (
   `id` int NOT NULL,
-  `nama_tipe` varchar(144) NOT NULL
+  `nama_jenis` varchar(144) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `jenis_produk`
 --
 
-INSERT INTO `jenis_produk` (`id`, `nama_tipe`) VALUES
+INSERT INTO `jenis_produk` (`id`, `nama_jenis`) VALUES
 (1, 'Vitamin'),
-(2, 'Obat'),
-(3, 'Suplemen'),
-(4, 'Obat Anak');
+(2, 'Antibiotik'),
+(3, 'Analgesik'),
+(4, 'Obat Batuk'),
+(5, 'Antasida'),
+(6, 'Antipiretik'),
+(7, 'Antihipertensi'),
+(8, 'Antiaritmia'),
+(10, 'Antidepresan'),
+(11, 'Antipsikotik');
 
 -- --------------------------------------------------------
 
@@ -65,6 +87,7 @@ CREATE TABLE `produk` (
   `id` int NOT NULL,
   `nama_produk` varchar(36) NOT NULL,
   `harga` double NOT NULL,
+  `qty` int NOT NULL,
   `id_jenis` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -72,8 +95,17 @@ CREATE TABLE `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id`, `nama_produk`, `harga`, `id_jenis`) VALUES
-(1, 'Vitamin C+', 5000, 1);
+INSERT INTO `produk` (`id`, `nama_produk`, `harga`, `qty`, `id_jenis`) VALUES
+(1, 'Vitamin C+', 5000, 15, 1),
+(2, 'Amoxcillin', 10000, 12, 2),
+(3, 'Aspirin', 8000, 5, 3),
+(4, 'Siladex', 4000, 42, 4),
+(5, 'Aluminium Hidroksida', 6000, 23, 5),
+(6, 'Parasetamol', 12000, 25, 6),
+(7, ' Benazepril', 10000, 33, 7),
+(8, 'Propranolol', 21000, 20, 8),
+(9, 'Amitriptyline HCl', 18000, 22, 10),
+(10, 'Haloperidol', 11000, 44, 11);
 
 -- --------------------------------------------------------
 
@@ -91,8 +123,9 @@ CREATE TABLE `role` (
 --
 
 INSERT INTO `role` (`id`, `nama_role`) VALUES
-(1, 'Cust'),
-(2, 'Admin');
+(1, 'Member'),
+(2, 'Admin'),
+(3, 'Non-Member');
 
 -- --------------------------------------------------------
 
@@ -103,9 +136,25 @@ INSERT INTO `role` (`id`, `nama_role`) VALUES
 CREATE TABLE `transaksi` (
   `id` int NOT NULL,
   `tanggal_pembelian` datetime NOT NULL,
-  `total_produk` double NOT NULL,
+  `qty` int NOT NULL,
   `id_user` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`id`, `tanggal_pembelian`, `qty`, `id_user`) VALUES
+(1, '2024-03-20 21:34:47', 5, 1),
+(2, '2024-03-20 21:34:47', 3, 3),
+(3, '2024-03-20 21:34:47', 2, 4),
+(4, '2024-03-20 21:34:47', 5, 5),
+(5, '2024-03-20 21:34:47', 7, 6),
+(6, '2024-03-20 21:34:47', 1, 7),
+(7, '2024-03-20 21:34:47', 6, 8),
+(8, '2024-03-20 21:34:47', 2, 9),
+(9, '2024-03-20 14:34:38', 1, 10),
+(10, '2024-03-20 21:41:41', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -127,7 +176,15 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `nama`, `username`, `password`, `id_role`) VALUES
 (1, 'Rizqy', 'rizqy', '123', 1),
-(2, 'admin', 'admin', '123', 2);
+(2, 'admin', 'admin', '123', 2),
+(3, 'andre', 'andre', '123', 3),
+(4, 'ila', 'ila', '123', 1),
+(5, 'ade', 'ade', '123', 3),
+(6, 'resa', 'resa', '123', 1),
+(7, 'fares', 'fares', '123', 1),
+(8, 'safa', 'safa', '123', 1),
+(9, 'rendra', 'rendra', '123', 3),
+(10, 'tesar', 'tesar', '123', 1);
 
 --
 -- Indexes for dumped tables
@@ -182,37 +239,37 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `jenis_produk`
 --
 ALTER TABLE `jenis_produk`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
