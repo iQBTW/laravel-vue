@@ -2,37 +2,37 @@ Tugas Simple Query (bagian 1)
 
 Table User
 SELECT * FROM `user` WHERE id_role = 1;
-SELECT * FROM `user` WHERE id_role = 2;
-SELECT * FROM `user` WHERE id_role = 3;
-SELECT * FROM `user` WHERE id ORDER BY id_role=1 DESC
-SELECT * FROM `user` WHERE id ORDER BY id_role=2 DESC
-SELECT * FROM `user` WHERE id ORDER BY id_role=3 DESC
-SELECT * FROM `user` WHERE id ORDER BY id_role=1 ASC
-SELECT * FROM `user` WHERE id ORDER BY id_role=2 ASC
-SELECT * FROM `user` WHERE id ORDER BY id_role=3 ASC
-SELECT nama FROM `user` WHERE id_role = 2
+SELECT COUNT(id) as Jumlah, nama, id_role FROM user WHERE id_role=1 GROUP BY id ORDER BY id DESC;
+SELECT COUNT(id)as Jumlah, nama, id_role FROM user WHERE id_role=1 GROUP BY id ORDER BY id ASC;
+SELECT * FROM user WHERE nama LIKE 'A%'
+SELECT COUNT(id) as TotalUser FROM `user`
+SELECT * FROM `user` ORDER BY id_role DESC
+SELECT * FROM `user` ORDER BY id_role ASC
+SELECT nama FROM user WHERE nama LIKE '%Y'
+SELECT * FROM user WHERE nama LIKE '%i%'
+SELECT * FROM `user` ORDER BY id_role ASC LIMIT 5
 
 Table Transaksi
-SELECT qty FROM `transaksi` WHERE qty > 2;
-SELECT qty FROM `transaksi` WHERE qty < 2;
-SELECT qty FROM `transaksi` WHERE qty >= 2;
-SELECT qty FROM `transaksi` WHERE qty <= 2;
-SELECT qty FROM `transaksi` WHERE qty <= 2 ORDER BY qty DESC
-SELECT qty FROM `transaksi` WHERE qty <= 2 ORDER BY qty ASC
-SELECT qty FROM `transaksi` WHERE id_user=1
-SELECT qty FROM `transaksi` WHERE id_user=1 ORDER BY qty DESC
-SELECT qty FROM `transaksi` WHERE id_user=1 ORDER BY qty ASC
-SELECT tanggal_pembelian,qty FROM `transaksi` WHERE id_user=1 ORDER BY qty DESC
+SELECT * FROM `transaksi` WHERE qty > 2;
+SELECT * FROM `transaksi` WHERE qty < 2;
+SELECT * FROM `transaksi` WHERE qty >= 2;
+SELECT * FROM `transaksi` WHERE qty <= 2;
+SELECT * FROM `transaksi` WHERE qty <= 20 ORDER BY qty DESC
+SELECT * FROM `transaksi` WHERE qty <= 20 ORDER BY qty ASC
+SELECT * FROM `transaksi` WHERE id_user=1
+SELECT * FROM `transaksi` WHERE id_user=1 ORDER BY qty DESC
+SELECT * FROM `transaksi` WHERE id_user=1 ORDER BY qty ASC
+SELECT SUM(qty) as TotalQty FROM `transaksi`
 
 Table Produk
 SELECT * FROM `produk` where qty > 2
 SELECT * FROM `produk` where qty < 2
 SELECT * FROM `produk` where qty >= 2
 SELECT * FROM `produk` where qty <= 2
-SELECT * FROM `produk` where qty > 2
+SELECT SUM(qty) as TotalQty FROM `produk`
 SELECT * FROM `produk` where qty > 2 ORDER BY qty ASC
-SELECT * FROM `produk` where qty > 2 ORDER BY qty DESC
-SELECT id_jenis as Jenis_Produk FROM `produk`
+SELECT * FROM `produk` where qty < 2 ORDER BY qty DESC
+SELECT id, nama_produk as Jenis_Produk FROM `produk` WHERE nama_produk LIKE 'A%'
 SELECT * FROM `produk` WHERE harga > 5000 ORDER BY harga DESC
 SELECT * FROM `produk` WHERE harga < 5000 ORDER BY harga ASC
 
