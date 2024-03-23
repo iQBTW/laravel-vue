@@ -1,0 +1,6 @@
+Query SQL Update & Delete Apotek
+UPDATE user SET nama='Admin' WHERE id=2;
+UPDATE produk SET harga=2000, qty=30 WHERE id=1;
+UPDATE transaksi SET qty=7 WHERE id=1;
+DELETE FROM role WHERE id=4
+DELETE FROM `produk` WHERE id=11
