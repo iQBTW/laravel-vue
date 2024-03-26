@@ -1,0 +1,45 @@
+Latihan Studi Kasus Query SQL Apotek
+
+1. SELECT produk.id, produk.nama_produk, jenis_produk.nama_jenis
+FROM produk
+JOIN jenis_produk ON produk.id_jenis = jenis_produk.id
+
+2. SELECT user.nama, user.username, role.nama_role as role
+FROM user
+JOIN role ON user.id_role = role.id
+WHERE role.nama_role LIKE 'Member%'
+
+3. SELECT transaksi.tanggal_pembelian, transaksi.qty, user.nama
+FROM transaksi
+JOIN user ON transaksi.id_user = user.id
+
+4. SELECT transaksi.tanggal_pembelian, transaksi.qty, user.nama
+FROM transaksi
+JOIN user ON transaksi.id_user = user.id
+WHERE MONTH(transaksi.tanggal_pembelian) = '03'
+
+5. SELECT transaksi.tanggal_pembelian, transaksi.qty, user.nama, produk.nama_produk, detail_transaksi.harga
+FROM detail_transaksi
+JOIN transaksi ON detail_transaksi.id_transaksi = transaksi.id
+JOIN user ON transaksi.id_user = user.id
+JOIN produk ON detail_transaksi.id_produk = produk.id
+WHERE MONTH(transaksi.tanggal_pembelian) = '03'
+
+6. SELECT transaksi.tanggal_pembelian, transaksi.qty, user.nama, produk.nama_produk, jenis_produk.nama_jenis, detail_transaksi.harga, role.nama_role
+FROM detail_transaksi
+JOIN transaksi ON detail_transaksi.id_transaksi = transaksi.id
+JOIN user ON transaksi.id_user = user.id
+JOIN produk ON detail_transaksi.id_produk = produk.id
+JOIN jenis_produk ON produk.id_jenis = jenis_produk.id
+JOIN role ON user.id_role = role.id
+WHERE role.nama_role LIKE "Non%"
+
+7. SELECT transaksi.tanggal_pembelian, transaksi.qty, user.nama, produk.nama_produk, jenis_produk.nama_jenis, produk.harga, detail_transaksi.harga as "Total Harga", role.nama_role
+FROM detail_transaksi
+JOIN transaksi ON detail_transaksi.id_transaksi = transaksi.id
+JOIN user ON transaksi.id_user = user.id
+JOIN produk ON detail_transaksi.id_produk = produk.id
+JOIN jenis_produk ON produk.id_jenis = jenis_produk.id
+JOIN role ON user.id_role = role.id
+WHERE role.nama_role LIKE "Non%"
+ORDER BY produk.harga ASC
