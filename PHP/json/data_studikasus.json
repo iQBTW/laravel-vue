@@ -1,0 +1,22 @@
+[
+    {
+        "nama" : "Pelita",
+        "umur" : 20,
+        "kelas" : "Laravel"
+    },
+    {
+        "nama" : "Najmina",
+        "umur" : 21,
+        "kelas" : "Vue JS"
+    },
+    {
+        "nama" : "Anita",
+        "umur" : 22,
+        "kelas" : "Design"
+    },
+    {
+        "nama" : "Bayu",
+        "umur" : 23,
+        "kelas" : "Digital Marketing"
+    }
+]
