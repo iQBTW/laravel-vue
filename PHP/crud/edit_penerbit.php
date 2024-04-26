@@ -12,7 +12,7 @@
     while($penerbit_data = mysqli_fetch_array($penerbit))
     {
         $id_penerbit = $penerbit_data["id_penerbit"];
-        $nama_penerbit = $penerbit_data['nama_penerbit'];
+		$nama_penerbit = $penerbit_data['nama_penerbit'];
         $email = $penerbit_data['email'];
         $telp = $penerbit_data['telp'];
         $alamat = $penerbit_data['alamat'];
@@ -35,7 +35,7 @@
 			</tr>
 			<tr> 
 				<td>Email</td>
-				<td><input type="email" name="email" value="<?= $email; ?>"></td>
+				<td><input type="text" name="email" value="<?= $email; ?>"></td>
 			</tr>
 			<tr> 
 				<td>Telp</td>
@@ -56,7 +56,8 @@
 	 
 		// Check If form submitted, insert form data into users table.
 		if(isset($_POST['update'])) {
-			$id_penerbit = $_POST['id_penerbit'];
+
+			$id_penerbit = $_GET['id_penerbit'];
 			$nama_penerbit = $_POST['nama_penerbit'];
 			$email = $_POST['email'];
 			$telp = $_POST['telp'];
