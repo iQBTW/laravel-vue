@@ -12,7 +12,7 @@
  
 <body>
 
-<center>
+<center class="mt-3">
     <a href="index.php">Buku</a> |
     <a href="penerbit.php">Penerbit</a> |
     <a href="pengarang.php">Pengarang</a> |
@@ -20,7 +20,7 @@
     <hr>
 </center>
 
-<a href="add_katalog.php">Add New Katalog</a><br/><br/>
+    <a class="btn btn-primary" href="add_katalog.php">Add New Katalog</a><br/><br/>
  
     <table class="table" width='80%' border=1>
         <tr>
