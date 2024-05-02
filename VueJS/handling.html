@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="greet">Greet</button>
+        <br />
+        <button @click="increment">Add 1</button>
+        <p>Count is: {{ count }}</p>
+        <button @click="decrement">Remove 1</button>
+    </div>
+</body>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const { createApp, ref } = Vue
+
+    createApp({
+        setup() {
+            const name = ref('Vue.js')
+
+            function greet(event) {
+                alert(`Hello ${name.value}!`)
+                // `event` is the native DOM event
+                if (event) {
+                    alert(event.target.tagName)
+                }
+            }
+
+            const count = ref(0)
+
+            const increment = () => {
+                count.value++
+            }
+
+            const decrement = () => {
+                count.value--
+            }
+
+            return {
+                count,
+                increment,
+                decrement,
+                greet,
+                name
+            }
+        }
+    }).mount('#app')
+</script>
+
+</html>
